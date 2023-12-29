@@ -218,7 +218,23 @@ const server = http.createServer((req, res) => {
                         res.end(JSON.stringify(ket_qua))
                     })
                 })
-            } else {
+            } else if (url == "/SuaTivi") {
+                req.on('end', function () {
+                    let tivi = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.updateOne("tivi", tivi.condition, tivi.update).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua))
+                    })
+                })
+            }
+            else {
                 res.end(JSON.stringify(results));
             }
 
