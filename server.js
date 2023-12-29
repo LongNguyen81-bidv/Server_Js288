@@ -243,7 +243,51 @@ const server = http.createServer((req, res) => {
                     })
 
                 })
-            } else {
+            } else if (url == "/ImagesTivi") {
+                req.on('end', function () {
+                    let img = JSON.parse(noi_dung_nhan);
+                    let Ket_qua = { "Noi_dung": true };
+
+                    imgCloud.UPLOAD_CLOUDINARY(img.name, img.src).then(result => {
+                        console.log(result);
+                        res.end(JSON.stringify(Ket_qua));
+
+                    }).catch(err => {
+                        console.log(err)
+                        Ket_qua.Noi_dung = false
+                        res.end(JSON.stringify(Ket_qua))
+                    })
+                })
+            } else if (url == "/ImagesFood") {
+                req.on('end', function () {
+                    let img = JSON.parse(noi_dung_nhan);
+                    let Ket_qua = { "Noi_dung": true };
+
+                    imgCloud.UPLOAD_CLOUDINARY(img.name, img.src).then(result => {
+                        console.log(result);
+                        res.end(JSON.stringify(Ket_qua));
+                    }).catch(err => {
+                        console.log(err)
+                        Ket_qua.Noi_dung = false
+                        res.end(JSON.stringify(Ket_qua))
+                    })
+                })
+            } else if (url == "/ImagesUser") {
+                req.on('end', function () {
+                    let img = JSON.parse(noi_dung_nhan);
+                    let Ket_qua = { "Noi_dung": true };
+
+                    imgCloud.UPLOAD_CLOUDINARY(img.name, img.src).then(result => {
+                        console.log(result);
+                        res.end(JSON.stringify(Ket_qua));
+                    }).catch(err => {
+                        console.log(err)
+                        Ket_qua.Noi_dung = false
+                        res.end(JSON.stringify(Ket_qua))
+                    })
+                })
+            }
+            else {
                 res.end(JSON.stringify(results));
             }
             break;
