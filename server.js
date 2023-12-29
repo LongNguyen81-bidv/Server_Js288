@@ -78,6 +78,51 @@ const server = http.createServer((req, res) => {
                         res.end(JSON.stringify(ket_qua));
                     })
                 })
+            } else if (url == "/ThemTivi") {
+                req.on('end', function () {
+                    let tivi = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.insertOne("tivi", tivi).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    })
+                })
+            } else if (url == "/ThemFood") {
+                req.on('end', function () {
+                    let food = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.insertOne("food", food).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    })
+                })
+            } else if (url == "/ThemUser") {
+                req.on('end', function () {
+                    let user = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.insertOne("user", user).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    })
+                })
             } else if (url == "/Dangnhap") {
                 req.on("end", () => {
                     let ket_qua = {
@@ -233,11 +278,40 @@ const server = http.createServer((req, res) => {
                         res.end(JSON.stringify(ket_qua))
                     })
                 })
+            } else if (url == "/SuaFood") {
+                req.on('end', function () {
+                    let food = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.updateOne("food", food.condition, food.update).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua))
+                    })
+                })
+            } else if (url == "/SuaUser") {
+                req.on('end', function () {
+                    let user = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.updateOne("user", user.condition, user.update).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua))
+                    })
+                })
             }
             else {
                 res.end(JSON.stringify(results));
             }
-
             break;
         case "DELETE":
             if (url == "/XoaDienthoai") {
@@ -254,9 +328,54 @@ const server = http.createServer((req, res) => {
                         res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
                         res.end(JSON.stringify(ket_qua))
                     })
-
                 })
-            } else {
+            } else if (url == "/XoaTivi") {
+                req.on('end', function () {
+                    let tivi = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.deleteOne("tivi", tivi).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua))
+                    })
+                })
+            } else if (url == "/XoaFood") {
+                req.on('end', function () {
+                    let food = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.deleteOne("food", food).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua))
+                    })
+                })
+            } else if (url == "/XoaUser") {
+                req.on('end', function () {
+                    let user = JSON.parse(noi_dung_nhan);
+                    let ket_qua = { "Noi_dung": true };
+                    db.deleteOne("user", user).then(result => {
+                        console.log(result);
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua));
+                    }).catch(err => {
+                        console.log(err);
+                        ket_qua.Noi_dung = false;
+                        res.writeHead(200, { "Content-Type": "text/json;charset=utf-8" });
+                        res.end(JSON.stringify(ket_qua))
+                    })
+                })
+            }
+            else {
                 res.end(JSON.stringify(results));
             }
             break;
