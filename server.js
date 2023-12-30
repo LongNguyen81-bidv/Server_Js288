@@ -388,6 +388,20 @@ const server = http.createServer((req, res) => {
                         res.end(JSON.stringify(ket_qua))
                     })
                 })
+                // Xóa image
+                req.on('end', function () {
+                    let img = JSON.parse(noi_dung_nhan);
+                    let Ket_qua = { "Noi_dung": true };
+
+                    imgCloud.DELETE_CLOUDINARY(img.name, img.src).then(result => {
+                        console.log(result);
+                        res.end(JSON.stringify(Ket_qua));
+                    }).catch(err => {
+                        console.log(err)
+                        Ket_qua.Noi_dung = false
+                        res.end(JSON.stringify(Ket_qua))
+                    })
+                })
             } else if (url == "/XoaFood") {
                 req.on('end', function () {
                     let food = JSON.parse(noi_dung_nhan);
